@@ -835,6 +835,60 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
+  /places:
+    get:
+      tags:
+        - Places
+      summary: Get all courses
+      operationId: getCourses
+      responses:
+        '200':
+          description: List of all courses
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Course'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+  put:
+    tags:
+      - Teaching
+    summary: Create new courses or update existing courses
+    description: Update courses when id are provided, create them otherwise.
+    operationId: createOrUpdateCourses
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Course'
+    responses:
+      '200':
+        description: The created or updated courses
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      '400':
+        $ref: '#/components/responses/400'
+      '403':
+        $ref: '#/components/responses/403'
+      '404':
+        $ref: '#/components/responses/404'
+      '429':
+        $ref: '#/components/responses/429'
+      '500':
+        $ref: '#/components/responses/500'
 components:
   securitySchemes:
     BearerAuth:
