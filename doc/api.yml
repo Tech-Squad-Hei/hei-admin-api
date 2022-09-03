@@ -835,6 +835,117 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
+  /places:
+    get:
+      tags:
+        - Places
+      summary: Get all places
+      operationId: getPlaces
+      responses:
+        '200':
+          description: List of all Places
+          content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Place'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Places
+      summary: Create new place or update existing place
+      description: Update place when id are provided, create them otherwise.
+      operationId: createOrUpdatePlaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Place'
+      responses:
+        '200':
+          description: The created or updated places
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+  '/places/{id}':
+    get:
+      tags:
+        - Places
+      summary: Get places by identifier
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      operationId: getPlacesById
+      responses:
+        '200':
+          description: The identified place
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+          tags:
+            - Places
+          summary: remove place by identifier
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          operationId: removePlaceById
+          responses:
+            '200':
+              description: The identified place to remove
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Place'
+            '400':
+              $ref: '#/components/responses/400'
+            '403':
+              $ref: '#/components/responses/403'
+            '404':
+              $ref: '#/components/responses/404'
+            '429':
+              $ref: '#/components/responses/429'
+            '500':
+              $ref: '#/components/responses/500'
 components:
   securitySchemes:
     BearerAuth:
@@ -915,6 +1026,11 @@ components:
           format: date-time
         status:
           $ref: '#/components/schemas/EnableStatus'
+    Place:
+        properties:
+          id:
+              type: number
+          label:
     EnableStatus:
       type: string
       enum:
