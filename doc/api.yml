@@ -918,6 +918,34 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
+    delete:
+          tags:
+            - Places
+          summary: remove place by identifier
+          parameters:
+            - name: id
+              in: path
+              required: true
+              schema:
+                type: string
+          operationId: removePlaceById
+          responses:
+            '200':
+              description: The identified place to remove
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Place'
+            '400':
+              $ref: '#/components/responses/400'
+            '403':
+              $ref: '#/components/responses/403'
+            '404':
+              $ref: '#/components/responses/404'
+            '429':
+              $ref: '#/components/responses/429'
+            '500':
+              $ref: '#/components/responses/500'
 components:
   securitySchemes:
     BearerAuth:
